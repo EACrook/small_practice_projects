@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"
+    <title>JS event listeners</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="sayings"></div>
+
+    <audio src="sound/mixkit-guitar-stroke-down-slow-2339.wav"></audio>
+<script>
+    // all the kind words as objects
+    const inspoQuotes = {
+        "A" : {
+            "key":"worth",
+            "saying":"You are worth it.",
+            "data":65
+        },
+        "S" : {
+            "key":"strong",
+            "saying":"You are strong.",
+            "data":83
+        },
+        "D" : {
+            "key":"doit",
+            "saying":"You can do anything you set your mind to.",
+            "data":68
+        },
+        "F" : {
+            "key":"talent",
+            "saying":"You are talented.",
+            "data":70
+        },
+        "J" : {
+            "key":"space",
+            "saying":"You deserve to take up space.",
+            "data":74
+        },
+        "K" : {
+            "key":"valid",
+            "saying":"Your thoughts, worries, hopes, etc. are valid, and you will overcome any obstacle.",
+            "data":75
+        },
+        "L" : {
+            "key":"love",
+            "saying":"You are worthy of love, to feel love, and to give love.",
+            "data":76
+        },
+    };
+    
+    for (const [key,value] of Object.entries(inspoQuotes)){
+        // create the div for each of the quotes
+        let divEl = document.createElement('div');
+        divEl.className = `${value.key}`
+        document.getElementsByClassName('sayings')[0].appendChild(divEl);
+
+        // create keyboard element
+        let keyboardEl = document.createElement('kbd');
+        keyboardEl.innerHTML = `${key}`;
+        divEl.appendChild(keyboardEl);
+
+        // create span element
+        let spanEl = document.createElement('span');
+        spanEl.id = `${value.data}`;
+        spanEl.className = "phrase";
+        spanEl.style.display = "none";
+        spanEl.innerHTML = `${value.saying}`;
+        divEl.appendChild(spanEl);
+    }
+
+    window.addEventListener('keydown', function(e) {
+        const saying = document.getElementById(`${e.keyCode}`);
+        console.log(saying);
+        if (saying) {
+            saying.style.display = "block";
+        }
+    })
+    
+</script>
+</body>
+</html>
